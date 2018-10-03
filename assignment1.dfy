@@ -84,3 +84,32 @@ method haveCommonKSubstring(k: nat, str1: string, str2: string) returns (found: 
     }
     return false;
 }
+
+
+method maxCommonSubstringLength(str1: string, str2: string) returns (len:nat){
+	var maxSubstring := 0;
+	var hasSubstring: bool;
+	var length := 0;
+
+	if(|str1| == 0 || |str2| == 0){
+		return 0;
+	}
+	
+	if(|str1| < |str2|){
+		length := |str1|;
+	}
+	else{
+		length := |str2|;
+	}
+
+	var i := 1;
+	while(i < length){
+		hasSubstring := haveCommonKSubstring(i, str1, str2);
+		if(hasSubstring && i > maxSubstring){
+			maxSubstring := i;
+		}
+		i := i + 1;
+	}
+
+	return maxSubstring;
+}
