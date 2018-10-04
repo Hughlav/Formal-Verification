@@ -46,34 +46,23 @@ method isSubstring(sub: string, str: string) returns (res:bool){
 }
 
 method haveCommonKSubstring(k: nat, str1: string, str2: string) returns (found: bool){
-    var strTest;
     var i := 0;
     var testSub: string;
     var otherStr: string;
     var result;
-
-    //find longer string, make it string to take test sub str from
-    if(|str1| >= |str2|){
-        strTest := str1;
-        otherStr := str2;
-    }
-    else{
-        strTest := str2;
-        otherStr := str1;
-    }
 
     //ensure k is between 0 and length of both strings
     if(k > |str1| || k > |str2| || k <= 0 ){
         return false;
     }
 
-    while(i+k < |strTest|)
+    while(i+k <= |str1|)
     {
         //get sub string of length k starting from index 0
-        testSub := strTest[i..i+k];
+        testSub := str1[i..i+k];
         
         //check if the test subStr is a subStr of other string
-        result := isSubstring(testSub, otherStr);
+        result := isSubstring(testSub, str2);
 
         if(result){
             return true;
