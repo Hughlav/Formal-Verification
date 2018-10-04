@@ -90,23 +90,40 @@ method maxCommonSubstringLength(str1: string, str2: string) returns (len:nat){
 	var maxSubstring := 0;
 	var hasSubstring: bool;
 	var length := 0;
+	var shortStr: string;
+	var longStr: string;
 
 	if(|str1| == 0 || |str2| == 0){
 		return 0;
 	}
 	
 	if(|str1| < |str2|){
-		length := |str1|;
+		shortStr := str1;
+		longStr := str2;
 	}
 	else{
-		length := |str2|;
+		shortStr := str2;
+		longStr := str1;
 	}
 
-	var i := 1;
-	while(i < length){
-		hasSubstring := haveCommonKSubstring(i, str1, str2);
-		if(hasSubstring && i > maxSubstring){
-			maxSubstring := i;
+	var i := 0;
+	var j := 0;
+	while(i < |shortStr|){
+		j := 0;
+		while(j < |shortStr| - 1){
+			if(j == 0){
+				hasSubstring := haveCommonKSubstring(i, shortStr[i..i], longStr);
+			}
+			else{
+				if(i + j < |shortStr|){
+					hasSubstring := haveCommonKSubstring(i, shortStr[i..i+j], longStr);
+				}
+				hasSubstring := false;
+			}	
+			if(hasSubstring && j > maxSubstring){
+				maxSubstring := j;
+			}
+			j := j + 1;
 		}
 		i := i + 1;
 	}
