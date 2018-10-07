@@ -18,27 +18,15 @@ method isSubstring(sub: string, str: string) returns (res:bool){
 	if(|sub| > |str|){
         return false;
     }
-
-	var prefix := isPrefix(sub, str);
-	if(prefix){
-		return true;
-	}
 	
+	var prefix : bool;
 	var i := 0;
-	var j := 0;
-	while(i < (|str| - |sub| + 1)){
-		while(j < |sub|){
-			if(str[i + j] == sub[j]){
-				if(j == (|sub| - 1)){	// if reached end of substring within string, return true
-					return true;
-				}
-			}
-			else{
-				break;
-			}
-			j := j + 1;
+
+	while(i < (|str| - |sub|)){
+		prefix := isPrefix(sub, str[i..]);
+		if(prefix){
+			return true;
 		}
-		j := 0;
 		i := i + 1;
 	}
 
