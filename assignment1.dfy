@@ -22,7 +22,7 @@ method isSubstring(sub: string, str: string) returns (res:bool){
 	var prefix : bool;
 	var i := 0;
 
-	while(i < (|str| - |sub|)){
+	while(i < (|str| - |sub| + 1)){
 		prefix := isPrefix(sub, str[i..]);
 		if(prefix){
 			return true;
